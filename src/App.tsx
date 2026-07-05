@@ -5,6 +5,7 @@ import { GamesListPage } from './pages/GamesListPage';
 import { LibraryPage } from './pages/LibraryPage';
 import { LoginPage } from './pages/LoginPage';
 import { OrderStatusPage } from './pages/OrderStatusPage';
+import { OrdersListPage } from './pages/OrdersListPage';
 import { UserFormPage } from './pages/UserFormPage';
 import { UsersListPage } from './pages/UsersListPage';
 
@@ -16,6 +17,7 @@ function App() {
         <Route path="games" element={<GamesListPage />} />
         <Route path="games/new" element={<GameFormPage />} />
         <Route path="games/:id/edit" element={<GameFormPage />} />
+        <Route path="orders" element={<OrdersListPage />} />
         <Route path="orders/:id" element={<OrderStatusPage />} />
         <Route path="users/new" element={<UserFormPage />} />
         <Route path="users" element={<UsersListPage />} />

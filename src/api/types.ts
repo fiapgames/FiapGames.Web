@@ -35,6 +35,7 @@ export interface OrderDto {
   gameId: string;
   price: number;
   status: OrderStatus;
+  rejectionReason: string | null;
   createdAt: string;
   updatedAt: string;
 }

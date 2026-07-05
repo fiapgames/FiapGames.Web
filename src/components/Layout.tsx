@@ -42,6 +42,9 @@ export function Layout() {
           <NavLink to="/games/new" className={({ isActive }) => (isActive ? 'active' : undefined)}>
             Novo jogo
           </NavLink>
+          <NavLink to="/orders" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+            Pedidos
+          </NavLink>
           <NavLink to="/users/new" className={({ isActive }) => (isActive ? 'active' : undefined)}>
             1. Cadastrar usuário
           </NavLink>

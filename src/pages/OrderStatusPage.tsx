@@ -47,6 +47,12 @@ export function OrderStatusPage() {
           </span>
           {order.status === 'Pending' && ' (aguardando confirmação do pagamento...)'}
         </dd>
+        {order.status === 'Rejected' && order.rejectionReason && (
+          <>
+            <dt>Motivo da rejeição</dt>
+            <dd className="error">{order.rejectionReason}</dd>
+          </>
+        )}
         <dt>Criado em</dt>
         <dd>{new Date(order.createdAt).toLocaleString('pt-BR')}</dd>
         <dt>Atualizado em</dt>
