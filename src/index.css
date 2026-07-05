@@ -1,0 +1,276 @@
+:root {
+  --text: #3f3d45;
+  --text-h: #08060d;
+  --bg: #fff;
+  --bg-subtle: #f7f7f9;
+  --border: #e5e4e7;
+  --accent: #7c3aed;
+  --accent-hover: #6d28d9;
+  --danger: #dc2626;
+  --success: #16a34a;
+  --warning: #d97706;
+
+  font: 16px/145% system-ui, 'Segoe UI', Roboto, sans-serif;
+  color-scheme: light dark;
+  color: var(--text);
+  background: var(--bg);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #d1d1d6;
+    --text-h: #f3f4f6;
+    --bg: #16171d;
+    --bg-subtle: #1f2028;
+    --border: #2e303a;
+    --accent: #a78bfa;
+    --accent-hover: #c4b5fd;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+h1,
+h2 {
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 28px;
+  margin: 0 0 20px;
+}
+
+a {
+  color: var(--accent);
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-subtle);
+  color: var(--text-h);
+  padding: 6px 12px;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 6px 10px;
+}
+
+.error {
+  color: var(--danger);
+  display: block;
+}
+
+/* Layout */
+.layout {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout__header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--border);
+}
+
+.layout__brand {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--text-h);
+  white-space: nowrap;
+}
+
+.layout__nav {
+  display: flex;
+  gap: 12px;
+}
+
+.layout__nav a {
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.layout__nav a.active {
+  background: var(--bg-subtle);
+  color: var(--text-h);
+  font-weight: 600;
+}
+
+.layout__lookup {
+  display: flex;
+  gap: 6px;
+}
+
+.layout__lookup input {
+  width: 160px;
+}
+
+.layout__auth {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+
+.layout__content {
+  flex: 1;
+  padding: 24px;
+  max-width: 960px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Health badge */
+.health-badge {
+  margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.health-badge__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--warning);
+}
+
+.health-badge--up .health-badge__dot {
+  background: var(--success);
+}
+
+.health-badge--down .health-badge__dot {
+  background: var(--danger);
+}
+
+/* Tables */
+.games-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.games-table th,
+.games-table td {
+  text-align: left;
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.games-table__actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 13px;
+  background: var(--bg-subtle);
+}
+
+.badge--active,
+.badge--status-approved {
+  color: var(--success);
+}
+
+.badge--inactive,
+.badge--status-rejected {
+  color: var(--danger);
+}
+
+.badge--status-pending {
+  color: var(--warning);
+}
+
+/* Forms */
+.buyer-id {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 480px;
+}
+
+.form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 500;
+  color: var(--text-h);
+}
+
+.form input,
+.form textarea {
+  font-weight: normal;
+}
+
+.form textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+.checkbox-field {
+  flex-direction: row !important;
+  align-items: center;
+  gap: 8px !important;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.detail-list {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 16px;
+}
+
+.detail-list dt {
+  font-weight: 600;
+  color: var(--text-h);
+}
+
+.detail-list dd {
+  margin: 0;
+}
