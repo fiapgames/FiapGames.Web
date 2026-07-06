@@ -67,7 +67,7 @@ function createHttpClient(baseUrl: string) {
   };
 }
 
-// Empty string in dev relies on the Vite proxy (see vite.config.ts) to avoid CORS,
-// since neither backend has CORS middleware configured.
+// Calls each backend directly (cross-origin) — both APIs have a CORS policy allowing
+// the Vite dev origin (see Program.cs in FiapGames.Catalog and Fiap.Games.Users).
 export const httpClient = createHttpClient(import.meta.env.VITE_API_BASE_URL ?? '');
 export const usersHttpClient = createHttpClient(import.meta.env.VITE_USERS_API_BASE_URL ?? '');
