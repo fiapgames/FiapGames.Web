@@ -12,10 +12,10 @@ dist
 dist-ssr
 *.local
 
-# Env files (o template fica em .env.example, o real é local por máquina)
-.env
-.env.*
-!.env.example
+# # Env files (o template fica em .env.example, o real é local por máquina)
+# .env
+# .env.*
+# !.env.example
 
 # Editor directories and files
 .vscode/*
