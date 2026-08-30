@@ -1,4 +1,3 @@
-import { authStore } from '../auth/authStore';
 import { usersHttpClient } from './httpClient';
 import type { CreateUserDto, LoginRequestDto, LoginResponseDto, PagedResult, UserDto } from './types';
 
@@ -6,11 +5,6 @@ export interface ListUsersParams {
   page?: number;
   pageSize?: number;
   search?: string;
-}
-
-function authHeader(): HeadersInit {
-  const token = authStore.getToken();
-  return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
 export const usersApi = {
@@ -23,8 +17,8 @@ export const usersApi = {
     if (params.search) query.set('search', params.search);
     const qs = query.toString();
 
-    return usersHttpClient.get<PagedResult<UserDto>>(`/api/users${qs ? `?${qs}` : ''}`, {
-      headers: authHeader(),
-    });
+    // The Authorization header is attached centrally in httpClient.ts — this used to
+    // build it by hand here, which is why the Catalog clients never sent a token.
+    return usersHttpClient.get<PagedResult<UserDto>>(`/api/users${qs ? `?${qs}` : ''}`);
   },
 };
