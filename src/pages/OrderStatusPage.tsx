@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { ApiError } from '../api/httpClient';
 import { useOrderQuery } from '../hooks/useOrders';
+import { useOrderHistoryQuery } from '../hooks/useHistory';
 
 const STATUS_LABEL: Record<string, string> = {
   Pending: 'Pendente',
@@ -8,9 +9,17 @@ const STATUS_LABEL: Record<string, string> = {
   Rejected: 'Rejeitado',
 };
 
+const EVENT_LABEL: Record<string, string> = {
+  OrderPlaced: 'Pedido criado',
+  PaymentApproved: 'Pagamento aprovado',
+  PaymentRejected: 'Pagamento rejeitado',
+  GameGranted: 'Jogo liberado na biblioteca',
+};
+
 export function OrderStatusPage() {
   const { id } = useParams<{ id: string }>();
   const { data: order, isLoading, isError, error } = useOrderQuery(id);
+  const { data: history } = useOrderHistoryQuery(id);
 
   if (isLoading) return <p>Carregando pedido...</p>;
 
@@ -58,6 +67,21 @@ export function OrderStatusPage() {
         <dt>Atualizado em</dt>
         <dd>{new Date(order.updatedAt).toLocaleString('pt-BR')}</dd>
       </dl>
+
+      {history && history.length > 0 && (
+        <>
+          <h2>Histórico</h2>
+          <ul className="timeline">
+            {history.map((event) => (
+              <li key={event.id}>
+                <strong>{EVENT_LABEL[event.eventType] ?? event.eventType}</strong>
+                <span className="timeline__time">{new Date(event.occurredAt).toLocaleString('pt-BR')}</span>
+                {event.reason && <p className="error">{event.reason}</p>}
+              </li>
+            ))}
+          </ul>
+        </>
+      )}
     </section>
   );
 }

@@ -35,46 +35,62 @@ export function Layout() {
       <header className="layout__header">
         <div className="layout__brand">FiapGames Catalog</div>
 
+        {/* Só o cadastro é público. Mostrar os demais links sem sessão seria oferecer
+            navegação que o RequireAuth devolve imediatamente para o login — e que o
+            Kong responderia com 401 de qualquer forma. */}
         <nav className="layout__nav">
-          <NavLink to="/games" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-            Jogos
-          </NavLink>
-          <NavLink to="/games/new" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-            Novo jogo
-          </NavLink>
-          <NavLink to="/orders" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-            Pedidos
-          </NavLink>
-          <NavLink to="/users/new" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-            1. Cadastrar usuário
-          </NavLink>
-          <NavLink to="/library" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-            2. Biblioteca
-          </NavLink>
-          <NavLink to="/users" className={({ isActive }) => (isActive ? 'active' : undefined)}>
-            Listar usuários
-          </NavLink>
+          {isAuthenticated ? (
+            <>
+              <NavLink to="/games" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                Jogos
+              </NavLink>
+              <NavLink to="/games/new" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                Novo jogo
+              </NavLink>
+              <NavLink to="/orders" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                Pedidos
+              </NavLink>
+              <NavLink to="/users/new" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                1. Cadastrar usuário
+              </NavLink>
+              <NavLink to="/library" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                2. Biblioteca
+              </NavLink>
+              <NavLink to="/users" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+                Listar usuários
+              </NavLink>
+            </>
+          ) : (
+            <NavLink to="/users/new" className={({ isActive }) => (isActive ? 'active' : undefined)}>
+              Cadastrar usuário
+            </NavLink>
+          )}
         </nav>
 
-        <form className="layout__lookup" onSubmit={goToOrder}>
-          <input
-            value={orderId}
-            onChange={(event) => setOrderId(event.target.value)}
-            placeholder="ID do pedido"
-            aria-label="ID do pedido"
-          />
-          <button type="submit">Ver pedido</button>
-        </form>
+        {/* Os dois atalhos levam a rotas protegidas (/orders/:id e /library/:userId). */}
+        {isAuthenticated && (
+          <>
+            <form className="layout__lookup" onSubmit={goToOrder}>
+              <input
+                value={orderId}
+                onChange={(event) => setOrderId(event.target.value)}
+                placeholder="ID do pedido"
+                aria-label="ID do pedido"
+              />
+              <button type="submit">Ver pedido</button>
+            </form>
 
-        <form className="layout__lookup" onSubmit={goToLibrary}>
-          <input
-            value={userId}
-            onChange={(event) => setUserId(event.target.value)}
-            placeholder="ID do usuário"
-            aria-label="ID do usuário"
-          />
-          <button type="submit">Ver biblioteca</button>
-        </form>
+            <form className="layout__lookup" onSubmit={goToLibrary}>
+              <input
+                value={userId}
+                onChange={(event) => setUserId(event.target.value)}
+                placeholder="ID do usuário"
+                aria-label="ID do usuário"
+              />
+              <button type="submit">Ver biblioteca</button>
+            </form>
+          </>
+        )}
 
         <div className="layout__auth">
           {isAuthenticated ? (

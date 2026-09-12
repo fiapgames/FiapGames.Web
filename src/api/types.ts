@@ -40,6 +40,18 @@ export interface OrderDto {
   updatedAt: string;
 }
 
+export interface PurchaseEventDto {
+  id: string;
+  orderId: string;
+  userId: string;
+  gameId: string;
+  gameTitle: string;
+  eventType: string;
+  price: number;
+  reason: string | null;
+  occurredAt: string;
+}
+
 export interface LibraryItemDto {
   gameId: string;
   title: string;

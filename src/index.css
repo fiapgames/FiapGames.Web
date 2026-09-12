@@ -274,3 +274,23 @@ textarea {
 .detail-list dd {
   margin: 0;
 }
+
+.timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.timeline li {
+  border-left: 2px solid var(--border);
+  padding-left: 12px;
+}
+
+.timeline__time {
+  display: block;
+  font-size: 0.85em;
+  opacity: 0.7;
+}
